@@ -1,8 +1,8 @@
 <?php
 // Configuración de la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "1WMG2023";
+$servername = "192.168.115.158";
+$username = "2Taldea";
+$password = "2Taldea";
 $dbname = "2taldea";
 
 // Crear conexión

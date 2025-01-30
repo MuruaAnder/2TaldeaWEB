@@ -1,8 +1,8 @@
 <?php
 // Configuración de la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "1WMG2023";
+$servername = "192.168.115.158";
+$username = "2Taldea";
+$password = "2Taldea";
 $dbname = "2taldea";
 
 // Crear conexión
@@ -13,33 +13,34 @@ $error = '';
 $success = '';
 $izena = '';
 $pertsonak = '';
-$data = '';
+$noizkoErreserba = '';
 
 // Procesar el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validar y limpiar datos
     $izena = trim($_POST['izena']);
     $pertsonak = intval($_POST['pertsonaKop']);
-    $data = $_POST['data'];
+    $noizkoErreserba = $_POST['noizkoErreserba'];
+    $data = date('Y-m-d'); // Fecha actual de la reserva
     
     // Validaciones
     if (empty($izena)) {
         $error = "Izena beharrezkoa da";
     } elseif ($pertsonak < 1) {
         $error = "Pertsona kopurua ez da egokia";
-    } elseif (strtotime($data) < strtotime('today')) {
+    } elseif (strtotime($noizkoErreserba) < strtotime('today')) {
         $error = "Data ez da egokia (iraganeko data)";
     } else {
         // Insertar en la base de datos
-        $stmt = $conn->prepare("INSERT INTO erreserba (izena, pertsonaKop, data) VALUES (?, ?, ?)");
-        $stmt->bind_param("sis", $izena, $pertsonak, $data);
+        $stmt = $conn->prepare("INSERT INTO erreserba (izena, pertsonaKop, data, noizkoErreserba) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("siss", $izena, $pertsonak, $data, $noizkoErreserba);
         
         if ($stmt->execute()) {
             $success = "Erreserba ondo erregistratu da!";
             // Resetear valores del formulario
             $izena = '';
             $pertsonak = '';
-            $data = '';
+            $noizkoErreserba = '';
         } else {
             $error = "Errorea erreserba egiterakoan: " . $conn->error;
         }
@@ -56,8 +57,6 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erreserbak</title>
     <link rel="stylesheet" href="style.css">
-    
-        
 </head>
 <body>
 <header class="logo">
@@ -90,8 +89,8 @@ $conn->close();
             </div>
             
             <div class="form-group">
-                <label for="data">Data:</label>
-                <input type="date" id="data" name="data" required value="<?php echo $data; ?>">
+                <label for="noizkoErreserba">Noizko erreserba:</label>
+                <input type="date" id="noizkoErreserba" name="noizkoErreserba" required value="<?php echo $noizkoErreserba; ?>">
             </div>
             
             <button type="submit">Bidali erreserba</button>
