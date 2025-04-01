@@ -2,8 +2,8 @@
 // Configuración de la base de datos
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "goierriAzoka_2mg3";
+$password = "1WMG2023";
+$dbname = "2taldea";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
