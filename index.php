@@ -2,8 +2,8 @@
 // Configuración de la base de datos
 $servername = "localhost";
 $username = "root";
-$password = "1WMG2023";
-$dbname = "2taldea";
+$password = "";
+$dbname = "goierriAzoka_2mg3";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // Obtener datos agrupados por categoría
-$sql = "SELECT * FROM platera ORDER BY FIELD(kategoria, 'Edaria', 'Lehenengo platera', 'Bigarren platera')";
+$sql = "SELECT * FROM platera ORDER BY FIELD(kategoria, 'Lehenengo platera', 'Bigarren platera', 'Edaria', 'Postrea')";
 $result = $conn->query($sql);
 
 $categorias = [];
@@ -37,9 +37,9 @@ $conn->close();
 <body>
 <header class="logo">
     <img src="logo.png" alt="Logo del Restaurante">
-    <div class="menu-button">
+    <!-- <div class="menu-button">
         <a href="erreserba.php"><button>Erreserba egin</button></a>
-    </div>
+    </div> -->
 </header>
 
     <div class="container">
