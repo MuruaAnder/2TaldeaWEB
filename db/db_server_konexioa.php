@@ -1,7 +1,7 @@
 <?php
 
 $servername = "192.168.115.154:3307";
-$username = "root";
+$username = "3taldea";
 $password = "2Erronka";
-$dbname = "2taldea";
+$dbname = "3taldea";
 
